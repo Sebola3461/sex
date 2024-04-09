@@ -35,8 +35,8 @@
 
         const newMiku = document.createElement("div");
         newMiku.className = "miku";
-        newMiku.style.top = `${mouse.y}px`;
-        newMiku.style.left = `${mouse.x}px`;
+        newMiku.style.top = `${mouse.y - sizing / 2}px`;
+        newMiku.style.left = `${mouse.x - sizing / 2}px`;
         newMiku.style.width = `${sizing}px`;
         newMiku.style.height = `${sizing}px`;
         newMiku.style.setProperty("--size", `${sizing}px`);
