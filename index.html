@@ -14,6 +14,7 @@
   <body>
     <p id="main_text">I <span>❤</span> sex</p>
     <p id="sec_text">This page is under construction</p>
+    <input type="checkbox" id="trol" checked />
     <script>
       window.addEventListener("mousemove", (mouse) => {
         const mainText = document.getElementById("main_text");
@@ -24,6 +25,41 @@
 
         secText.style.left = `-${mouse.screenX / 100}px`;
         secText.style.top = `-${mouse.screenY / 100}px`;
+      });
+
+      const trol = document.getElementById("trol");
+
+      trol.addEventListener("mouseover", (mouse) => {
+        if (getRandomNumber(0, 40) > 20) {
+          mouse.target.style.left = `${
+            getRandomNumber(0, 40) > 20 ? mouse.x - 20 : mouse.x + 20
+          }px`;
+          mouse.target.style.top = `${
+            getRandomNumber(0, 40) > 20 ? mouse.y - 20 : mouse.y + 20
+          }px`;
+        } else {
+          mouse.target.style.left = `${getRandomNumber(
+            0,
+            window.innerWidth - 40
+          )}px`;
+          mouse.target.style.top = `${getRandomNumber(
+            0,
+            window.innerHeight - 40
+          )}px`;
+        }
+      });
+
+      trol.addEventListener("click", (mouse) => {
+        mouse.preventDefault();
+
+        mouse.target.style.left = `${getRandomNumber(
+          0,
+          window.innerWidth - 40
+        )}px`;
+        mouse.target.style.top = `${getRandomNumber(
+          0,
+          window.innerHeight - 40
+        )}px`;
       });
 
       function getRandomNumber(min, max) {
@@ -62,6 +98,41 @@
         overflow: hidden;
       }
 
+      input {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        border: 30px solid transparent;
+        width: 20px;
+        transition: linear(
+            0 0%,
+            0 1.8%,
+            0.01 3.6%,
+            0.03 6.35%,
+            0.07 9.1%,
+            0.13 11.4%,
+            0.19 13.4%,
+            0.27 15%,
+            0.34 16.1%,
+            0.54 18.35%,
+            0.66 20.6%,
+            0.72 22.4%,
+            0.77 24.6%,
+            0.81 27.3%,
+            0.85 30.4%,
+            0.88 35.1%,
+            0.92 40.6%,
+            0.94 47.2%,
+            0.96 55%,
+            0.98 64%,
+            0.99 74.4%,
+            1 86.4%,
+            1 100%
+          )
+          230ms;
+        z-index: 999;
+      }
+
       p {
         position: relative;
       }
@@ -98,6 +169,7 @@
       .miku {
         width: 20px;
         height: 20px;
+        z-index: 99;
 
         position: absolute;
         animation-name: miku;
