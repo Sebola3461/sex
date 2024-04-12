@@ -67,10 +67,10 @@
       }
 
       window.addEventListener("click", (mouse) => {
-        const sizing = getRandomNumber(20, 240);
+        const sizing = getRandomNumber(20, 512);
 
         const newMiku = document.createElement("div");
-        newMiku.className = "miku";
+        newMiku.className = "miku pop";
         newMiku.style.top = `${mouse.y - sizing / 2}px`;
         newMiku.style.left = `${mouse.x - sizing / 2}px`;
         newMiku.style.width = `${sizing}px`;
@@ -78,6 +78,8 @@
         newMiku.style.setProperty("--size", `${sizing}px`);
 
         document.body.appendChild(newMiku);
+
+        setTimeout(() => newMiku.classList.remove("pop"), 240);
       });
     </script>
     <style>
@@ -154,16 +156,46 @@
           auto !important;
       }
 
+      @keyframes miku-jump {
+        0% {
+          transform: translateY(0);
+        }
+        40% {
+          transform: translateY(-50px);
+        }
+        60% {
+          transform: translateY(-1px);
+        }
+      }
+
+      .miku:hover {
+        transform: scaleX(1);
+        margin-top: 0px;
+        animation-name: miku-jump;
+        animation-duration: 700ms;
+        animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        animation-iteration-count: infinite;
+      }
+
       @keyframes miku {
         0% {
-          width: 0px;
           height: 0px;
+          width: 0px;
+          opacity: 0;
         }
 
         100% {
           height: var(--size);
           width: var(--size);
+          opacity: 1;
         }
+      }
+
+      .miku.pop {
+        animation-name: miku;
+        animation-duration: 240ms;
+        animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        animation-iteration-count: 1;
       }
 
       .miku {
@@ -172,10 +204,6 @@
         z-index: 99;
 
         position: absolute;
-        animation-name: miku;
-        animation-duration: 240ms;
-        animation-timing-function: cubic-bezier(0.68, -0.55, 0.27, 1.55);
-        animation-iteration-count: 1;
 
         background-position: center;
         background-size: 100%;
